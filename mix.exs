@@ -7,7 +7,25 @@ defmodule Simplificator3000.MixProject do
       version: "0.1.0",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
+      name: "Simplificator3000",
+      description: description(),
+      package: package(),
       deps: deps()
+    ]
+  end
+
+  def description() do
+    "Make your life in Phoenix easier"
+  end
+
+  defp package() do
+    [
+      # This option is only needed when you don't want to use the OTP application name
+      name: "simplificator_3000",
+      # These are the default files included in the package
+      files: ~w(lib .formatter.exs mix.exs README.md LICENSE),
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/KeenMate/simplificator_3000"}
     ]
   end
 
