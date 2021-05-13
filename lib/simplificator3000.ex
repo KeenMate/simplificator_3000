@@ -1,4 +1,10 @@
 defmodule Simplificator3000 do
+  def controller do
+    quote do
+      def set_title(conn, title), do: Plug.Conn.assign(conn, :title, title)
+    end
+  end
+
   def view do
     quote do
       @before_compile {unquote(__MODULE__), :view_before_compile}
@@ -10,11 +16,20 @@ defmodule Simplificator3000 do
       def title(conn, assigns) do
         {:ok, application} = :application.get_application()
         app_name = Application.get_env(application, :page_title)
+        title_separator = Application.get_env(application, :title_separator) || "・"
 
-        case view_module(conn).page_title(view_template(conn), assigns) do
-          title when is_binary(title) -> title <> " ・ " <> app_name
-          _ -> app_name
+        title =
+          case view_module(conn).page_title(view_template(conn), assigns) do
+            title when is_binary(title) -> title
+            _ -> Map.get(assigns, :title)
+          end
+
+        case title do
+          nil -> app_name
+          title -> title <> " " <> title_separator <> " " <> app_name
         end
+
+
       end
     end
   end
