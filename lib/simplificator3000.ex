@@ -16,7 +16,7 @@ defmodule Simplificator3000 do
       def title(conn, assigns) do
         {:ok, application} = :application.get_application()
         app_name = Application.get_env(application, :page_title)
-        title_separator = Application.get_env(application, :title_separator) || "・"
+        title_separator = Application.get_env(application, :title_separator)
 
         title =
           case view_module(conn).page_title(view_template(conn), assigns) do
@@ -24,9 +24,10 @@ defmodule Simplificator3000 do
             _ -> Map.get(assigns, :title)
           end
 
-        case title do
-          nil -> app_name
-          title -> title <> " " <> title_separator <> " " <> app_name
+        case {title, title_separator} do
+          {nil, _} -> app_name
+          {title, nil} -> title
+          {title, separator} -> title <> " " <> separator <> " " <> app_name
         end
 
 
