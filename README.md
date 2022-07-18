@@ -1,6 +1,6 @@
-# Simplificator3000
-
-**TODO: Add description**
+Simplificator 3000
+=====
+[![Hex pm](http://img.shields.io/hexpm/v/simplificator_3000.svg?style=flat)](https://hex.pm/packages/simplificator_3000)
 
 ## Installation
 
