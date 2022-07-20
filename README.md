@@ -10,7 +10,7 @@ by adding `simplificator_3000` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:simplificator_3000, "~> 0.1.0"}
+    {:simplificator_3000, "~> 0.1.2"}
   ]
 end
 ```
