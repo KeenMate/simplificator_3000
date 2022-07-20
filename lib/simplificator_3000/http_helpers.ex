@@ -1,6 +1,4 @@
 defmodule Simplificator3000.HttpHelpers do
-
-
   def sanitize_headers(headers) do
     headers
     |> Enum.filter(fn {_header, value} -> not is_nil(value) end)

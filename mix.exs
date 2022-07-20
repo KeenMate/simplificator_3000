@@ -15,7 +15,7 @@ defmodule Simplificator3000.MixProject do
   end
 
   def description() do
-    "Make your life in Phoenix easier"
+    "Make your life in Elixir easier"
   end
 
   defp package() do
@@ -32,19 +32,15 @@ defmodule Simplificator3000.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger, :crypto]
     ]
   end
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:plug, "1.13.6", optional: true},
-      {:phoenix, "1.6.10", optional: true},
-      {:inflex, "2.1.0", optional: true},
-      {:uuid, "1.1.8", optional: true}
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+      {:inflex, "2.1.0"},
+      {:uuid, "1.1.8"}
     ]
   end
 end
