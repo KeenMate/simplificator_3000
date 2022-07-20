@@ -10,6 +10,7 @@ defmodule Simplificator3000.MixProject do
       name: "Simplificator3000",
       description: description(),
       package: package(),
+      docs: docs(),
       deps: deps()
     ]
   end
@@ -20,25 +21,30 @@ defmodule Simplificator3000.MixProject do
 
   defp package() do
     [
-      # This option is only needed when you don't want to use the OTP application name
       name: "simplificator_3000",
-      # These are the default files included in the package
       files: ~w(lib .formatter.exs mix.exs README.md LICENSE),
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/KeenMate/simplificator_3000"}
+      links: %{"GitHub" => "https://github.com/KeenMate/simplificator_3000"},
+      source_url: "https://github.com/KeenMate/simplificator_3000",
     ]
   end
 
-  # Run "mix help compile.app" to learn about applications.
+  defp docs() do
+    [
+      main: "readme",
+      extras: ["README.md"]
+    ]
+  end
+
   def application do
     [
       extra_applications: [:logger, :crypto]
     ]
   end
 
-  # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:ex_doc, "~> 0.27", only: :dev, runtime: false},
       {:inflex, "2.1.0"},
       {:uuid, "1.1.8"}
     ]

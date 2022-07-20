@@ -10,11 +10,11 @@ defmodule Simplificator3000.EnumHelpers do
 
   ## Examples
 
-    iex> Simplificator3000.EnumHelpers.contains_all?([:a, :b, :c], [:a, :b])
-    true
+      iex> Simplificator3000.EnumHelpers.contains_all?([:a, :b, :c], [:a, :b])
+      true
 
-    iex> Simplificator3000.EnumHelpers.contains_all?([:a, :b, :c], [:a, :d])
-    false
+      iex> Simplificator3000.EnumHelpers.contains_all?([:a, :b, :c], [:a, :d])
+      false
   """
 
   @spec contains_all?(list(any), list(any)) :: boolean
@@ -29,11 +29,11 @@ defmodule Simplificator3000.EnumHelpers do
 
   ## Examples
 
-    iex> Simplificator3000.EnumHelpers.contains_any?([:a, :b, :c], [:a, :d])
-    true
+      iex> Simplificator3000.EnumHelpers.contains_any?([:a, :b, :c], [:a, :d])
+      true
 
-    iex> Simplificator3000.EnumHelpers.contains_any?([:a, :b, :c], [:d, :e])
-    false
+      iex> Simplificator3000.EnumHelpers.contains_any?([:a, :b, :c], [:d, :e])
+      false
   """
 
   @spec contains_any?(list(any), list(any)) :: boolean
