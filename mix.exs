@@ -46,7 +46,7 @@ defmodule Simplificator3000.MixProject do
     [
       {:ex_doc, "~> 0.27", only: :dev, runtime: false},
       {:inflex, "2.1.0"},
-      {:uuid, "1.1.8"}
+      {:elixir_uuid, "~> 1.2"}
     ]
   end
 end
