@@ -30,7 +30,7 @@ defmodule Simplificator3000.RandomHelpers do
   end
 
   @spec get_random_number(integer, integer, integer) :: binary
-  def get_random_number(min \\ 1, max \\ 999999, padding \\ 6) do
+  def get_random_number(min \\ 1, max \\ 999_999, padding \\ 6) do
     get_random_int(min, max)
     |> then(&Integer.to_string/1)
     |> then(fn n -> String.pad_leading(n, padding, "0") end)

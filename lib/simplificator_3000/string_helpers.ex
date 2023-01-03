@@ -28,4 +28,37 @@ defmodule Simplificator3000.StringHelpers do
   def anonymize_phone(phone) do
     Regex.replace(@anonymize_phone_regex, phone, @substitution_symbol)
   end
+
+  @camelize_regex ~r/(?:^|[-_])|(?=[A-Z][a-z])/
+
+  def camelize(word, option \\ :upper) do
+    case Regex.split(@camelize_regex, to_string(word)) do
+      words ->
+        words
+        |> Enum.filter(&(&1 != ""))
+        |> camelize_list(option)
+        |> Enum.join()
+    end
+  end
+
+  defp camelize_list([], _), do: []
+
+  defp camelize_list([h | tail], :lower) do
+    [lowercase(h)] ++ camelize_list(tail, :upper)
+  end
+
+  defp camelize_list([h | tail], :upper) do
+    [capitalize(h)] ++ camelize_list(tail, :upper)
+  end
+
+  def capitalize(word), do: String.capitalize(word)
+  def lowercase(word), do: String.downcase(word)
+
+  def add_prefix(word, prefix) when is_atom(word) do
+    add_prefix(Atom.to_string(word), prefix)
+  end
+
+  def add_prefix(word, prefix) do
+    prefix <> word
+  end
 end

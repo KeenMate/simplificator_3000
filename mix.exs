@@ -4,7 +4,7 @@ defmodule Simplificator3000.MixProject do
   def project do
     [
       app: :simplificator_3000,
-      version: "0.2.0",
+      version: "0.3.0",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       name: "Simplificator3000",
@@ -25,7 +25,7 @@ defmodule Simplificator3000.MixProject do
       files: ~w(lib .formatter.exs mix.exs README.md LICENSE),
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/KeenMate/simplificator_3000"},
-      source_url: "https://github.com/KeenMate/simplificator_3000",
+      source_url: "https://github.com/KeenMate/simplificator_3000"
     ]
   end
 
