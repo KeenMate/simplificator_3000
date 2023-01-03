@@ -4,7 +4,7 @@ defmodule Simplificator3000.MixProject do
   def project do
     [
       app: :simplificator_3000,
-      version: "0.3.0",
+      version: "0.4.0",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       name: "Simplificator3000",

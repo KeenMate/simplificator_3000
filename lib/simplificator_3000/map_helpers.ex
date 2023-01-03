@@ -1,18 +1,41 @@
 defmodule Simplificator3000.MapHelpers do
   alias Simplificator3000.StringHelpers
 
-  @spec camelize_map_keys(map) :: map
-  def camelize_map_keys(struct) when is_struct(struct) do
-    camelize_map_keys(Map.from_struct(struct))
+  def camel_cased_map_keys(%DateTime{} = val), do: val
+
+  def camel_cased_map_keys(%Time{} = val), do: val
+
+  def camel_cased_map_keys(%Date{} = val), do: val
+
+  def camel_cased_map_keys(struct) when is_struct(struct) do
+    struct
+    |> Map.from_struct()
+    |> camel_cased_map_keys()
   end
 
-  def camelize_map_keys(map) when is_map(map) do
+  def camel_cased_map_keys(%{} = map) do
     for {key, val} <- map, into: %{} do
-      {Inflex.camelize(key, :lower), camelize_map_keys(val)}
+      {Inflex.camelize(key, :lower), camel_cased_map_keys(val)}
     end
   end
 
-  def camelize_map_keys(val), do: val
+  def camel_cased_map_keys(list) when is_list(list) do
+    Enum.map(list, &camel_cased_map_keys/1)
+  end
+
+  def camel_cased_map_keys(val), do: val
+
+  def snake_cased_map_keys(%{} = map) do
+    for {key, val} <- map, into: %{} do
+      {Inflex.underscore(key), snake_cased_map_keys(val)}
+    end
+  end
+
+  def snake_cased_map_keys(list) when is_list(list) do
+    Enum.map(list, &snake_cased_map_keys/1)
+  end
+
+  def snake_cased_map_keys(val), do: val
 
   def add_prefix(map, prefix) when is_map(map) and is_bitstring(prefix) do
     Enum.map(map, &add_prefix_to_item(&1, prefix))
