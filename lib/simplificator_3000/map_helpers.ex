@@ -27,7 +27,7 @@ defmodule Simplificator3000.MapHelpers do
 
   def snake_cased_map_keys(%{} = map) do
     for {key, val} <- map, into: %{} do
-      {Inflex.underscore(key), snake_cased_map_keys(val)}
+      {StringHelpers.underscore(key), snake_cased_map_keys(val)}
     end
   end
 

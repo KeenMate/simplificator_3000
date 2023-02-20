@@ -61,4 +61,19 @@ defmodule Simplificator3000.StringHelpers do
   def add_prefix(word, prefix) do
     prefix <> word
   end
+
+  def underscore(atom) when is_atom(atom) do
+    case Atom.to_string(atom) do
+      "Elixir." <> rest -> underscore(rest)
+      word -> underscore(word)
+    end
+  end
+
+  def underscore(word) when is_binary(word) do
+    word
+    |> String.replace(~r/([a-z])([A-Z])/, "\\1_\\2")
+    |> String.replace(~r/([a-zA-Z])([0-9]+)/, "\\1_\\2")
+    |> String.replace(~r/-/, "_")
+    |> String.downcase()
+  end
 end
