@@ -76,4 +76,8 @@ defmodule Simplificator3000.StringHelpers do
     |> String.replace(~r/-/, "_")
     |> String.downcase()
   end
+
+  def random_string(length) do
+    :crypto.strong_rand_bytes(length) |> Base.encode64() |> binary_part(0, length)
+  end
 end

@@ -4,7 +4,7 @@ defmodule Simplificator3000.MixProject do
   def project do
     [
       app: :simplificator_3000,
-      version: "0.5.0",
+      version: "0.5.1",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
       name: "Simplificator3000",
@@ -46,7 +46,8 @@ defmodule Simplificator3000.MixProject do
     [
       {:ex_doc, "~> 0.27", only: :dev, runtime: false},
       {:inflex, "~> 2.1.0"},
-      {:uuid, "~> 1.1.8"}
+      {:uuid, "~> 1.1.8"},
+      {:httpoison, "~> 2.1"}
     ]
   end
 end

@@ -18,4 +18,8 @@ defmodule Simplificator3000.HttpHelpers do
       Map.put(acc, key, value)
     end)
   end
+
+  def content_json?(%HTTPoison.Response{headers: headers}) do
+    Keyword.fetch!(headers, "content-type") =~ "application/json"
+  end
 end
