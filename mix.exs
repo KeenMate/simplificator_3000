@@ -44,7 +44,7 @@ defmodule Simplificator3000.MixProject do
 
   defp deps do
     [
-      {:ex_doc, "~> 0.27", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.27", runtime: false},
       {:inflex, "~> 2.1.0"},
       {:uuid, "~> 1.1.8"},
       {:httpoison, "~> 2.1"}
