@@ -1,0 +1,5 @@
+{
+  "i18n-ally.localesPaths": [
+    "deps/ex_doc/lib/ex_doc/language"
+  ]
+}
