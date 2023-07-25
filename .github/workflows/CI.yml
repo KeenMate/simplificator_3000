@@ -5,7 +5,10 @@ on:
     branches:
       - master
   pull_request:
-
+  workflow_call:
+    secrets:
+      HEX_API_KEY:
+        required: true
 jobs:
   test:
     runs-on: ubuntu-20.04
@@ -25,6 +28,8 @@ jobs:
           elixir-version: 1.13.2
 
       - uses: actions/cache@v2
+        env:
+          HEX_API_KEY: ${{ secrets.HEX_API_KEY }}
         with:
           path: |
             deps
@@ -47,3 +52,5 @@ jobs:
         if: ${{ matrix.lint }}
 
       - run: mix test
+      
+      - run: mix hex.publish --yes
