@@ -45,4 +45,21 @@ defmodule Simplificator3000.MapHelpers do
   defp add_prefix_to_item({key, value}, prefix) do
     {StringHelpers.add_prefix(key, prefix), value}
   end
+
+  @doc """
+  DONT USE FOR USER INPUT
+  It uses String.to_atom which is not safe for user input.
+  Converts all keys of a map to atoms.
+  """
+  def keys_to_atoms(json) when is_map(json) do
+    Map.new(json, &reduce_keys_to_atoms/1)
+  end
+
+  defp reduce_keys_to_atoms({key, val}) when is_map(val),
+    do: {String.to_atom(key), keys_to_atoms(val)}
+
+  defp reduce_keys_to_atoms({key, val}) when is_list(val),
+    do: {String.to_atom(key), Enum.map(val, &keys_to_atoms(&1))}
+
+  defp reduce_keys_to_atoms({key, val}), do: {String.to_atom(key), val}
 end
