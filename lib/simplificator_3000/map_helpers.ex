@@ -1,5 +1,8 @@
 defmodule Simplificator3000.MapHelpers do
   alias Simplificator3000.StringHelpers
+  # TODO fix inconsistent behavion
+  # camel cased map keys converts almost all struct to map, because its used to convert result to json response
+  # but snake_cased_map_keys is used to convert user input to snake case, so it should not convert structs to maps
 
   def camel_cased_map_keys(%DateTime{} = val), do: val
 
@@ -25,7 +28,9 @@ defmodule Simplificator3000.MapHelpers do
 
   def camel_cased_map_keys(val), do: val
 
-  def snake_cased_map_keys(%{} = map) do
+  def snake_cased_map_keys(struct = %_{}), do: struct
+
+  def snake_cased_map_keys(map) when is_map(map) do
     for {key, val} <- map, into: %{} do
       {StringHelpers.underscore(key), snake_cased_map_keys(val)}
     end
