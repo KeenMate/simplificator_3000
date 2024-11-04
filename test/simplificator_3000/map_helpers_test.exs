@@ -1,6 +1,6 @@
 defmodule Simplificator3000.MapHelpersTest do
   use ExUnit.Case
-  doctest Simplificator3000.MapHelpers
+  doctest Simplificator3000.MapHelpers, import: true
 
   test "snake case map keys" do
     struct = %{
