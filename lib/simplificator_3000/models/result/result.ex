@@ -3,7 +3,7 @@ defmodule Simplificator3000.Result do
 
   @type t() :: Ok.t() | Error.t()
 
-  @spec with_ok(__MODULE__.t(), (Ok.t() -> any())) :: Result.t()
+  @spec with_ok(t(), (Ok.t() -> any())) :: Result.t()
   @doc """
   Calls given `fun` with provided result only if it is `Ok` result.
   Outcome of the given function is wrapped in `Ok` result if it is not already a valid result struct
@@ -28,8 +28,20 @@ defmodule Simplificator3000.Result do
   """
   def with_ok(%Ok{} = result, fun) do
     case fun.(result) do
+      {:ok, data} ->
+        %Ok{data: data}
+
+      {:ok, data, metadata} ->
+        %Ok{data: data, metadata: metadata}
+
       %Ok{} = new_result ->
         new_result
+
+      {:error, reason} ->
+        %Error{reason: reason}
+
+      {:error, reason, metadata} ->
+        %Error{reason: reason, metadata: metadata}
 
       %Error{} = new_result ->
         new_result
@@ -41,5 +53,20 @@ defmodule Simplificator3000.Result do
 
   def with_ok(result, _fun) do
     result
+  end
+
+  @spec wrap({:ok, any()} | {:ok, any(), any()} | {:error, any()} | {:error, any(), any()} | Result.t()) :: Result.t()
+  @doc """
+  Converts classic way of ok/error result into Ok/Error structs for common processing
+  """
+  def wrap(result) do
+    case result do
+      %Ok{} = x -> x
+      %Error{} = x -> x
+      {:ok, data} -> %Ok{data: data}
+      {:ok, data, metadata} -> %Ok{data: data, metadata: metadata}
+      {:error, reason} -> %Error{reason: reason}
+      {:error, reason, metadata} -> %Error{reason: reason, metadata: metadata}
+    end
   end
 end
